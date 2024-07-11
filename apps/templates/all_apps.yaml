@@ -19,7 +19,6 @@ spec:
   source:
     repoURL: {{ default $currentScope.Values.source.repoURL $settings.repoURL }}
     path: services/{{ default $service $settings.folder }}
-    chart: {{ default "" $settings.chart }}
     targetRevision: {{ default $currentScope.Values.source.targetRevision $settings.targetRevision }}
     helm:
       version: v3

@@ -29,7 +29,7 @@ spec:
         - values.yaml
 {{ if $settings.values -}}
       values: |
-{{ toYaml $settings.values | indent 8}}
+{{ toYaml $settings.values | indent 8 }}
 {{- end }}
   syncPolicy:
     automated:

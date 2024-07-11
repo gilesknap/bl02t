@@ -24,7 +24,7 @@ spec:
 {{ if .values -}}
       values: |
 {{ toYaml .values | indent 8}}
-{{- end -}}
+{{- end }}
   syncPolicy:
     automated:
       prune: true

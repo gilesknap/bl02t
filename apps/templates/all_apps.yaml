@@ -25,8 +25,8 @@ spec:
       valueFiles:
         - ../beamline_values.yaml
         - values.yaml
-      values: |
 {{- if .values -}}
+      values: |
 {{ toYaml .values | indent 8}}
 {{- end -}}
   syncPolicy:

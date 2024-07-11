@@ -1,9 +1,11 @@
 {{- $currentScope := .}}
-{{- range .Values.services -}}
+{{-   range $service, $settings := .Values.services -}}
+# allow for nil settings by making it an empty dict
+{{- $settings := dict $settings }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: {{ .service }}
+  name: {{ $service }}
   namespace: {{ $currentScope.Release.Namespace }}
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -13,15 +15,15 @@ spec:
     namespace: {{ $currentScope.Values.destination.namespace }}
     name: {{ $currentScope.Values.destination.name }}
   source:
-    repoURL: {{ default $currentScope.Values.source.repoURL .repoURL }}
-    path: services/{{ default .service .folder }}
-    chart: {{ default "" .chart }}
-    targetRevision: {{ default $currentScope.Values.source.targetRevision .targetRevision }}
+    repoURL: {{ default $currentScope.Values.source.repoURL $settings.repoURL }}
+    path: services/{{ default $settings.service $settings.folder }}
+    chart: {{ default "" $settings.chart }}
+    targetRevision: {{ default $currentScope.Values.source.targetRevision $settings.targetRevision }}
     helm:
       parameters:
         - name: ioc-instance.enabled
-          value: {{ ternary true false (ne .enabled false) | quote }}
-        {{-  range $k, $v := .values }}
+          value: {{ ternary true false (ne $settings.enabled false) | quote }}
+        {{-  range $k, $v := $settings.values }}
         - name: {{ $k }}
           value: {{ $v | quote }}
         {{- end }}

@@ -15,7 +15,6 @@ spec:
   source:
     repoURL: {{ default $currentScope.Values.source.repoURL $settings.repoURL }}
     path: services/{{ default $service $settings.folder }}
-    chart: {{ default "" $settings.chart }}
     targetRevision: {{ default $currentScope.Values.source.targetRevision $settings.targetRevision }}
     helm:
       version: v3
@@ -31,9 +30,7 @@ spec:
       prune: true
       selfHeal: true
     syncOptions:
-      # don't restart pods unless there has been a change
       - ApplyOutOfSyncOnly=true
       - RespectIgnoreDifferences=true
-
 ---
 {{- end -}}

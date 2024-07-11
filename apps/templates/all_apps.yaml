@@ -1,7 +1,5 @@
 {{- $currentScope := .}}
 {{-   range $service, $settings := .Values.services -}}
-# allow for nil settings by making it an empty dict
-{{- $settings := dict $settings }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:

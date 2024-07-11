@@ -7,6 +7,10 @@ source:
   targetRevision: main
 
 services:
-  epics-pvcs: {}
-  epics-opis: {}
-  bl02t-ea-test-01: {}
+  epics-pvcs:
+    enabled: true
+  epics-opis:
+    enabled: true
+  bl02t-ea-test-01:
+    enabled: true
+

@@ -3,6 +3,7 @@
 ioc-instance:
   # the beamline name - only set for beamlines
   beamline: bl02t
+  enabled: true # TODO: change helmchart to use global.enabled
 
   # useHostNetwork - use host network for IOC - required for Channel Access
   # to work outside of the cluster

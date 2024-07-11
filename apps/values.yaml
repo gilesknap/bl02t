@@ -10,7 +10,6 @@ services:
   epics-pvcs:
     enabled: true
   epics-opis:
-    removed: true
+    enabled: true
   bl02t-ea-test-01:
     enabled: true
-

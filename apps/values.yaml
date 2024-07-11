@@ -7,6 +7,6 @@ source:
   targetRevision: main
 
 services:
-  epics-pvcs:
+  epics-pvcs: {}
   epics-opis: {}
   bl02t-ea-test-01: {}

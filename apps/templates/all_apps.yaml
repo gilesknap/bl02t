@@ -1,5 +1,8 @@
 {{- $currentScope := .}}
 {{-   range $service, $settings := .Values.services -}}
+# For charts that do no support 'global.enabled' use removed:true to stop them.
+# But note that this will loose rollback history
+{{- if ne $settings.removed true }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -15,6 +18,7 @@ spec:
   source:
     repoURL: {{ default $currentScope.Values.source.repoURL $settings.repoURL }}
     path: services/{{ default $service $settings.folder }}
+    chart: {{ default "" $settings.chart }}
     targetRevision: {{ default $currentScope.Values.source.targetRevision $settings.targetRevision }}
     helm:
       version: v3
@@ -30,7 +34,10 @@ spec:
       prune: true
       selfHeal: true
     syncOptions:
+      # don't restart pods unless there has been a change
       - ApplyOutOfSyncOnly=true
       - RespectIgnoreDifferences=true
+
 ---
+{{- end -}}
 {{- end -}}

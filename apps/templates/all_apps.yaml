@@ -25,7 +25,7 @@ spec:
         - ../beamline_values.yaml
         - values.yaml
       fileParameters:
-      {{-  range .files  }}
+      {{-  range $settings.files  }}
         - name: global.files.{{ . | replace "." "_dot_" }}
           path: config/{{ . }}
       {{- end }}

@@ -10,3 +10,4 @@ services:
   epics-pvcs:
   epics-opis:
   bl02t-ea-test-01:
+    files: ["ioc.yaml", "ioc.db"]

@@ -1,7 +1,7 @@
-{{- $currentScope := .}}
+{{- $currentScope := . -}}
 {{- range $service, $settings := .Values.services -}}
 {{- $settings := default (dict "enabled" true) $settings -}}
-# set removed to true to take this application off of the cluster for now
+# set removed to true to take this application off of the cluster
 {{ if ne $settings.removed true }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -42,5 +42,5 @@ spec:
       - ApplyOutOfSyncOnly=true
       - RespectIgnoreDifferences=true
 ---
-{{ end -}}
+{{ end }}
 {{- end -}}

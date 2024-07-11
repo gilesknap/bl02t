@@ -4,7 +4,7 @@
 # But note that this will loose rollback history
 {{- if ne $settings.removed true -}}
 # empty settings default to enable: true
-{{- $settings default (dict "enabled" true) $settings }}
+{{- $settings := default (dict "enabled" true) $settings }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:

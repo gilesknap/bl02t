@@ -2,7 +2,7 @@
 {{-   range $service, $settings := .Values.services -}}
 # For charts that do no support 'global.enabled' use removed:true to stop them.
 # But note that this will loose rollback history
-{{- if ne $settings.removed true -}}
+{{- if ne $settings.removed true }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:

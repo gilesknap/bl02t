@@ -21,19 +21,14 @@ spec:
     chart: {{ default "" $settings.chart }}
     targetRevision: {{ default $currentScope.Values.source.targetRevision $settings.targetRevision }}
     helm:
-      parameters:
-        # participating charts will scale to zero when this is set
-        - name: global.enabled
-          value: {{ ternary true false (ne $settings.enabled false) | quote }}
-        {{-  range $k, $v := $settings.values }}
-        - name: {{ $k }}
-          value: {{ $v | quote }}
-        {{- end }}
       version: v3
       valueFiles:
         - ../beamline_values.yaml
         - values.yaml
-
+      values: |
+{{- if .values -}}
+{{ toYaml .values | indent 8}}
+{{- end -}}
   syncPolicy:
     automated:
       prune: true

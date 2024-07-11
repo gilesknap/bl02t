@@ -9,6 +9,5 @@ source:
 services:
   epics-pvcs:
   epics-opis:
-    removed: true
   bl02t-ea-test-01:
     files: ["ioc.yaml", "ioc.db"]

@@ -24,6 +24,11 @@ spec:
       valueFiles:
         - ../beamline_values.yaml
         - values.yaml
+      fileParameters:
+      {{-  range .files  }}
+        - name: global.files.{{ . | replace "." "_dot_" }}
+          path: config/{{ . }}
+      {{- end }}
 {{ if $settings.values -}}
       values: |
 {{ toYaml $settings.values | indent 8 }}

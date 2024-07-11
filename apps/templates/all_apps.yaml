@@ -14,7 +14,7 @@ spec:
     name: {{ $currentScope.Values.destination.name }}
   source:
     repoURL: {{ default $currentScope.Values.source.repoURL $settings.repoURL }}
-    path: services/{{ default $settings.service $settings.folder }}
+    path: services/{{ default $service $settings.folder }}
     chart: {{ default "" $settings.chart }}
     targetRevision: {{ default $currentScope.Values.source.targetRevision $settings.targetRevision }}
     helm:
@@ -39,16 +39,5 @@ spec:
       - ApplyOutOfSyncOnly=true
       - RespectIgnoreDifferences=true
 
-  # allow ec to start/stop services without sync undoing that
-  # I think we prefer use of 'enabled' as an override
-  # ignoreDifferences:
-  # - group: apps
-  #   kind: Deployment
-  #   jsonPointers:
-  #   - /spec/replicas
-  # - group: apps
-  #   kind: StatefulSet
-  #   jsonPointers:
-  #   - /spec/replicas
 ---
 {{- end -}}

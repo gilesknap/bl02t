@@ -3,7 +3,8 @@
 # For charts that do no support 'global.enabled' use removed:true to stop them.
 # But note that this will loose rollback history
 # empty settings default to enable: true
-{{- if ne $settings.removed true -}}
+{{- $settings := default (dict "enabled" true) $settings -}}
+{{- if ne $settings.removed true }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -37,7 +38,6 @@ spec:
       # don't restart pods unless there has been a change
       - ApplyOutOfSyncOnly=true
       - RespectIgnoreDifferences=true
-
 ---
 {{- end -}}
 {{- end -}}

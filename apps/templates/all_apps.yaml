@@ -1,5 +1,8 @@
 {{- $currentScope := .}}
 {{-   range $service, $settings := .Values.services -}}
+# For charts that do no support 'global.enabled' use removed:true to stop them.
+# But note that this will loose rollback history
+{{- if ne $settings.removed -}}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -19,7 +22,8 @@ spec:
     targetRevision: {{ default $currentScope.Values.source.targetRevision $settings.targetRevision }}
     helm:
       parameters:
-        - name: ioc-instance.enabled
+        # participating charts will scale to zero when this is set
+        - name: global.enabled
           value: {{ ternary true false (ne $settings.enabled false) | quote }}
         {{-  range $k, $v := $settings.values }}
         - name: {{ $k }}

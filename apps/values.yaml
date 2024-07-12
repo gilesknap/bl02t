@@ -10,6 +10,6 @@ services:
   epics-pvcs:
     enabled: true
   epics-opis:
-    enabled: false
   bl02t-ea-test-01:
+    enabled: true
     files: ["ioc.yaml", "ioc.db"]

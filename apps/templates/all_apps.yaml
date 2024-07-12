@@ -1,10 +1,10 @@
 {{- $currentScope := . -}}
 {{- range $service, $settings := .Values.services -}}
-# if there are no settings, make settings just {enabled: true)
-{{- $settings := default (dict "enabled" true) $settings -}}
-# if there are settings but no enabled, merge in {enabled: true}
-{{- if ne $settings.enabled false -}}
-{{- $settings := merge $settings (dict "enabled" true) -}}
+# if there are no settings, make settings just {status: yes)
+{{- $settings := default (dict "status" "running") $settings -}}
+# if there are settings but no status, merge in {status: yes}
+{{- if ne $settings.status "stopped" -}}
+{{- $settings := merge $settings (dict "status" "running") -}}
 {{- end -}}
 # set removed to true to take this application off of the cluster
 {{ if ne $settings.removed true }}
@@ -36,7 +36,7 @@ spec:
       {{- end }}
       values: |
         global:
-          enabled: {{ $settings.enabled }}
+          status: {{ $settings.status }}
 {{ if $settings.values -}}
 {{ toYaml $settings.values | indent 8 }}
 {{- end }}

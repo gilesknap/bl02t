@@ -8,7 +8,6 @@ source:
 
 services:
   epics-pvcs:
-    enabled: false
   epics-opis:
   bl02t-ea-test-01:
     files: ["ioc.yaml", "ioc.db"]

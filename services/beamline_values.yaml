@@ -13,3 +13,5 @@ ioc-instance:
 
 global:
   beamline: bl02t
+  # valid values are running/stopped
+  status: running

@@ -1,6 +1,8 @@
 {{- $currentScope := . -}}
 {{- range $service, $settings := .Values.services -}}
+# make sure settings always has enabled true if it has not been supplied
 {{- $settings := default (dict "enabled" true) $settings -}}
+{{- $settings.enabled := default true $settings.enabled -}}
 # set removed to true to take this application off of the cluster
 {{ if ne $settings.removed true }}
 apiVersion: argoproj.io/v1alpha1

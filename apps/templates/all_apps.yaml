@@ -25,13 +25,13 @@ spec:
       valueFiles:
         - ../beamline_values.yaml
         - values.yaml
-      fileParameters:
       {{-  range $settings.files  }}
+      fileParameters:
         - name: global.files.{{ . | replace "." "_dot_" }}
           path: config/{{ . }}
       {{- end }}
-      parameters:
       {{- if eq $settings.enabled false }}
+      parameters:
         global:
           enabled: {{ $settings.enabled }}
       {{- end -}}

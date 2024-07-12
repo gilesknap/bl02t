@@ -3,7 +3,7 @@
 # if there are no settings, make settings just {enabled: true)
 {{- $settings := default (dict "enabled" true) $settings -}}
 # if there are settings but no enabled, merge in {enabled: true}
-{{- if eq $settings.enabled nil -}}
+{{- if ne $settings.enabled false -}}
 {{- $settings := merge $settings (dict "enabled" true) -}}
 {{- end -}}
 # set removed to true to take this application off of the cluster

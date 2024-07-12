@@ -32,7 +32,8 @@ spec:
       {{- end }}
       {{- if eq $settings.enabled false }}
       parameters:
-        global.enabled: {{ $settings.enabled }}
+        - name: global.enabled
+          value: {{ $settings.enabled }}
       {{- end -}}
       {{ if $settings.values -}}
       values: |

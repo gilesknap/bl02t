@@ -29,8 +29,10 @@ spec:
         - name: global.files.{{ . | replace "." "_dot_" }}
           path: config/{{ . }}
       {{- end }}
-{{ if $settings.values -}}
       values: |
+        global:
+          enabled: {{ $settings.enabled }}
+{{ if $settings.values -}}
 {{ toYaml $settings.values | indent 8 }}
 {{- end }}
   syncPolicy:

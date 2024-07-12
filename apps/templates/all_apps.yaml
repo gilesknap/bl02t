@@ -2,10 +2,6 @@
 {{- range $service, $settings := .Values.services -}}
 # if there are no settings, make settings just {enabled: true)
 {{- $settings := default (dict "enabled" true) $settings -}}
-# if there are settings but no enabled, merge in {enabled: true}
-{{- if ne $settings.enabled false -}}
-{{- $settings := merge $settings (dict "enabled" true) -}}
-{{- end -}}
 # set removed to true to take this application off of the cluster
 {{ if ne $settings.removed true }}
 apiVersion: argoproj.io/v1alpha1
@@ -34,12 +30,15 @@ spec:
         - name: global.files.{{ . | replace "." "_dot_" }}
           path: config/{{ . }}
       {{- end }}
-      values: |
+      parameters:
+      {{- if eq $settings.enabled false }}
         global:
           enabled: {{ $settings.enabled }}
-{{ if $settings.values -}}
+      {{- end -}}
+      {{ if $settings.values -}}
+      values: |
 {{ toYaml $settings.values | indent 8 }}
-{{- end }}
+      {{- end }}
   syncPolicy:
     automated:
       prune: true

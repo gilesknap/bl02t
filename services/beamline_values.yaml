@@ -13,4 +13,3 @@ ioc-instance:
 
 global:
   beamline: bl02t
-  enabled: true

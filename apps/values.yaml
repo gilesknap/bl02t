@@ -6,6 +6,10 @@ source:
   repoURL: https://github.com/gilesknap/bl02t.git
   targetRevision: main
 
+# NOTE: fields that appear here will show up in the root app parameters and can
+# therefore be overriden in the UI (or CLI).
+# Fields added in 'values:' in the all_apps.yaml template are not overrideable
+# AFAIK (but fields added in the  parameters section are)
 services:
   epics-pvcs:
     enabled: true

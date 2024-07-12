@@ -8,6 +8,8 @@ source:
 
 services:
   epics-pvcs:
+    status: stopped
   epics-opis:
+    status: running
   bl02t-ea-test-01:
     files: ["ioc.yaml", "ioc.db"]
